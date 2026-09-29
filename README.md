@@ -1,35 +1,46 @@
-# Model-Based Software Design
+# One-Pedal Driving System (Model-Based Software Design)
 
-This repository contains the models, scripts, and laboratory reports developed for the **Model-Based Software Design** course at **Politecnico di Torino** (Department of Control and Computer Engineering - DAUIN, Prof. Massimo Violante).
+This repository contains the models, control logic, test harnesses, and laboratory reports developed for an automotive **One-Pedal Driving System (OPDS)**.  
+The project was developed for the **Model-Based Software Design** course at **Politecnico di Torino** (Department of Control and Computer Engineering - DAUIN, Prof. Massimo Violante).
 
 ## Overview
 
-The project explores the **Model-Driven Engineering (MDE)** workflow applied to automotive and embedded control systems, following the **V-Model** development life cycle:
+The project explores the **Model-Driven Engineering (MDE)** workflow applied to an automotive One-Pedal Driving control unit, following the **V-Model** development life cycle:
 
-- **Functional Safety (ISO 26262):** Item definition, Hazard Analysis and Risk Assessment (HARA), and Functional Safety Concept definition.
-- **System and Control Modeling:** Design of dynamic plant models and control/supervisory algorithms using **MATLAB**, **Simulink**, and **Stateflow** in compliance with **MAAB** (MathWorks Automotive Advisory Board) guidelines.
+- **Functional Safety (ISO 26262):** Item definition, Hazard Analysis and Risk Assessment (HARA), Automotive Safety Integrity Level (ASIL) allocation, and Functional Safety Concept (FSC) definition.
+- **System and Control Modeling:** Dynamic vehicle plant simulation and supervisory control logic designed with **MATLAB**, **Simulink**, and **Stateflow** in compliance with **MAAB** (MathWorks Automotive Advisory Board) modeling guidelines.
 - **Verification and Validation (X-in-the-Loop):**
-  - **MIL (Model-in-the-Loop):** Co-simulation of the controller and plant models in Simulink using Test Harnesses and model coverage analysis.
-  - **SIL / PIL / HIL (Software/Processor/Hardware-in-the-Loop):** Verification of generated C/C++ code and deployment of the control algorithm on target hardware (**Arduino**).
-- **Automatic Code Generation:** Generation of portable and target-specific code using **Simulink Coder** and **Embedded Coder** with discrete fixed-step solvers.
+  - **MIL (Model-in-the-Loop):** Closed-loop co-simulation of the controller and vehicle plant models in Simulink using Test Harnesses, assertion blocks, and model coverage analysis (Decision, Condition, and MCDC coverage).
+  - **SIL / PIL / HIL (Software/Processor/Hardware-in-the-Loop):** Verification of generated C/C++ code and target deployment on microcontrollers (**Arduino**).
+- **Automatic Code Generation:** Generation of MISRA-compliant and portable C/C++ code using **Simulink Coder** and **Embedded Coder** with discrete fixed-step solvers.
 
 ---
 
 ## Repository Structure
 
 ```text
-Model_Based_Software_Design/
-├── Lab_1 Kit/           # Lab 1: Functional Safety (ISO 26262), Item Definition, and HARA
-├── Lab_2_kit/           # Lab 2: Plant and Controller modeling, Test Harness, and MIL simulation
-├── Lab_3 Kit/           # Lab 3: Functional Safety Concept, Test Cases, and Model Coverage
-└── Lab4_Kit/            # Lab 4: Target deployment on Arduino and hardware integration
+One-Pedal_Driving_System/
+├── Lab_1_Kit/           # Lab 1: Functional Safety (ISO 26262), Item Definition, and HARA
+├── Lab_2_Kit/           # Lab 2: Plant & Controller modeling, Test Harness, and MIL simulation
+├── Lab_3_Kit/           # Lab 3: Functional Safety Concept, Test Cases, and Model Coverage
+├── Lab_4_Kit/           # Lab 4: Target deployment on Arduino and hardware integration
+├── .gitignore           # Git ignore patterns for MATLAB/Simulink artifacts
+└── README.md            # Project documentation
 ```
 
 ### Key Contents
 
-- **Lab 1 Kit:** Assessment matrix (`Assessment matrix.xlsx`), laboratory report (`MBSD_Lab 1.pdf`), and project notes (`ReadMe.docx`).
-- **Lab 2 & Lab 3 Kits:** Closed-loop simulation models (`plant.slx`, `controller.slx`, `harness.slx`, `test1.slx`), enumerated state definitions (`TransmissionState.m`), workspace initialization scripts (`init_fn.m`), and laboratory reports (`MBSD_Lab 2.pdf`, `MBSD_Lab 3.pdf`, `Explanations.pdf`).
-- **Lab 4 Kit:** Hardware deployment models for **Arduino** (`controller.slx`, `controller_Arduino_ok.slx`), hardware simulation project (`Lab4.sim1`), initialization files (`init_fn.m`, `TransmissionState.m`), and laboratory report (`MBSD_Lab 4.pdf`).
+- **Lab_1_Kit:** Assessment matrix (`Assessment matrix.xlsx`) and the laboratory report (`MBSD_Lab 1.pdf`) covering system boundaries, malfunction analysis, and HARA.
+- **Lab_2_Kit & Lab_3_Kit:**
+  - Closed-loop simulation models: `plant.slx`, `controller.slx`, `harness.slx`, `test1.slx`
+  - Model initialization script: `init_fn.m`
+  - Enumeration definitions: `TransmissionState.m`
+  - Technical reports & documentation: `MBSD_Lab 2.pdf`, `MBSD_Lab 3.pdf`, `Explanations.pdf`
+- **Lab_4_Kit:**
+  - Arduino hardware integration models: `controller.slx`, `controller_Arduino_ok.slx`
+  - Hardware simulation project: `Lab4.sim1`
+  - Initialization scripts: `init_fn.m`, `TransmissionState.m`
+  - Laboratory report: `MBSD_Lab 4.pdf`
 
 ---
 
@@ -47,12 +58,16 @@ Model_Based_Software_Design/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/francesca-for/Model_Based_Software_Design.git
-   cd Model_Based_Software_Design
+   git clone https://github.com/francesca-for/One-Pedal_Driving_System.git
+   cd One-Pedal_Driving_System
    ```
 
-2. **Initialize the environment:**
-   Open MATLAB, navigate to the desired laboratory directory (`Lab_2_kit/`, `Lab_3 Kit/`, or `Lab4_Kit/`), and run `init_fn.m` and `TransmissionState.m` to load the required parameters and enumerated data types into the workspace.
+2. **Initialize the workspace:**
+   Open MATLAB, navigate to the specific lab directory (e.g., `Lab_2_Kit/`, `Lab_3_Kit/`, or `Lab_4_Kit/`), and run the initialization files to load calibration parameters and data types:
+   ```matlab
+   run('init_fn.m');
+   ```
 
 3. **Run simulations and code generation:**
-   Open the Simulink models (`harness.slx`, `test1.slx`, or `controller.slx`) to execute closed-loop simulations or generate C/C++ code via **Embedded Coder**.
+   - Open `harness.slx` or `test1.slx` to execute MIL closed-loop test scenarios.
+   - Open `controller.slx` to inspect the state machine and generate C/C++ code via **Embedded Coder** (press `Ctrl+B` / `Cmd+B`).
