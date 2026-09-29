@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+._*
+__MACOSX/
+
+# MATLAB / Simulink temp and backup
+*.asv
+*.autosave
+*.slx.r20*
+*.mdl.r20*
+*.slxc
+
+# Simulink build, cache and coverage directories
+slprj/
+*_ert_rtw/
+*_grt_rtw/
+sfprj/
+slcov_output/
+*.cvt
+
+# binaries and other compiled files
+*.mex*
+*.elf
+*.eep
+*.hex
+*.bin
+*.o
+*.obj
+
+# Course slides, and .docx files
+Lezione*/
+Example/
+Examples/
+*Example*.pdf
+MBSD_Lab*.docx
+Lab_3 Kit/Lab 3 - Explanation.pdf
+Lab4_Kit/Lab4 - Slides.pdf
+Lab_1 Kit/ReadMe.docx
